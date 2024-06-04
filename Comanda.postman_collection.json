@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "705b9ce7-e846-432c-8c93-4ca587a6780e",
+		"name": "Comanda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34176584"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "CreateUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "usuario",
+									"value": "cGarcia",
+									"type": "text"
+								},
+								{
+									"key": "clave",
+									"value": "12213",
+									"type": "text"
+								},
+								{
+									"key": "nombre_empleado",
+									"value": "Chaly Garcia",
+									"type": "text"
+								},
+								{
+									"key": "tipo_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1991/usuarios/?usuario=Prueba&clave=1234",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"usuarios",
+								""
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "Prueba"
+								},
+								{
+									"key": "clave",
+									"value": "1234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarUsuarios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "usuario",
+									"value": "nsampini",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1991/usuarios/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"usuarios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerUsuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "usuario",
+								"value": "nsampini"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:1991/usuarios/nsampini",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"usuarios",
+								"nsampini"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "CrearProducto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre_producto",
+									"value": "Milanesa",
+									"type": "text"
+								},
+								{
+									"key": "categoria_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "700",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1991/productos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"productos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarProductos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1991/productos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"productos",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mesas",
+			"item": [
+				{
+					"name": "CrearMesa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "codigo_mesa",
+									"value": "89kld",
+									"type": "text"
+								},
+								{
+									"key": "estado",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1991/mesas/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"mesas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarMesas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1991/mesas/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"mesas",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "CrearPedidos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "mesa_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "usuario_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "cliente_nombre",
+									"value": "Jorge EMilio",
+									"type": "text"
+								},
+								{
+									"key": "estado",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1991/pedidos/?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"pedidos",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarPedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1991/pedidos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"pedidos",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
