@@ -1,4 +1,6 @@
 <?php
+
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 // Error Handling
 error_reporting(-1);
 ini_set('display_errors', 1);
@@ -11,11 +13,14 @@ use Slim\Routing\RouteCollectorProxy;
 use Slim\Routing\RouteContext;
 
 require __DIR__ . '/../vendor/autoload.php';
-
 require_once './db/AccesoDatos.php';
 // require_once './middlewares/Logger.php';
-
 require_once './controllers/UsuarioController.php';
+require_once './controllers/ProductoController.php';
+require_once './controllers/MesasController.php';
+require_once './controllers/PedidosController.php';
+
+
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -32,16 +37,35 @@ $app->addBodyParsingMiddleware();
 
 // Routes
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-    $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
-    $group->post('[/]', \UsuarioController::class . ':CargarUno');
-  });
+  $group->get('[/]', \UsuarioController::class . ':TraerTodos');
+  $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
+  $group->post('[/]', \UsuarioController::class . ':CargarUno');
+});
 
-$app->get('[/]', function (Request $request, Response $response) {    
-    $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
-    
-    $response->getBody()->write($payload);
-    return $response->withHeader('Content-Type', 'application/json');
+$app->group('/productos', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \ProductoController::class . ':TraerTodos');
+  $group->get('/{producto}', \ProductoController::class . ':TraerUno');
+  $group->post('[/]', \ProductoController::class . ':CargarUno');
+});
+
+$app->group('/mesas', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \MesasController::class . ':TraerTodos');
+  $group->get('/{mesa}', \MesasController::class . ':TraerUno');
+  $group->post('[/]', \MesasController::class . ':CargarUno');
+});
+
+$app->group('/pedidos', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \PedidosController::class . ':TraerTodos');
+  $group->get('/{pedido}', \PedidosController::class . ':TraerUno');
+  $group->post('[/]', \PedidosController::class . ':CargarUno');
+});
+
+
+$app->get('[/]', function (Request $request, Response $response) {
+  $payload = json_encode(array("mensaje" => "Bienvenido a TP COMANDA - Sampini Nicolas"));
+
+  $response->getBody()->write($payload);
+  return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->run();

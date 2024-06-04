@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Date;
+
 require_once './models/Usuario.php';
 require_once './interfaces/IApiUsable.php';
 
@@ -10,11 +13,17 @@ class UsuarioController extends Usuario implements IApiUsable
 
         $usuario = $parametros['usuario'];
         $clave = $parametros['clave'];
-
+        $nombre_empleado = $parametros['nombre_empleado'];
+        $tipo_id = $parametros['tipo_id'];
+        
         // Creamos el usuario
         $usr = new Usuario();
         $usr->usuario = $usuario;
         $usr->clave = $clave;
+        $usr->nombre_empleado = $nombre_empleado;
+        $usr->tipo_id = $tipo_id;
+        $usr->fecha_registro = Date::now();
+
         $usr->crearUsuario();
 
         $payload = json_encode(array("mensaje" => "Usuario creado con exito"));
