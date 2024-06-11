@@ -26,14 +26,14 @@ class PedidosController extends Pedido implements IApiUsable
         $mesa_id = $parametros['mesa_id'];
         $usuario_id = $parametros['usuario_id'];
         $cliente_nombre = $parametros['cliente_nombre'];
-        $estado = $parametros['estado'];
+        $estado_pedido_id = $parametros['estado_pedido_id'];
         $fecha_registro = Date::now();
 
         $pedido =  new Pedido();
         $pedido->mesa_id = $mesa_id;
         $pedido->usuario_id = $usuario_id;
         $pedido->cliente_nombre = $cliente_nombre;
-        $pedido->estado = $estado;
+        $pedido->estado_pedido_id = $estado_pedido_id;
         $pedido->fecha_registro = $fecha_registro;
 
         $pedido->crearpedido();
