@@ -14,9 +14,9 @@ class Usuario
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO usuarios (usuario, clave, nombre_empleado, tipo_id, fecha_registro) VALUES (:usuario, :clave, :nombre_empleado, :tipo_id, :fecha_registro)");
-        $claveHash = password_hash($this->clave, PASSWORD_DEFAULT);
+        // $claveHash = password_hash($this->clave, PASSWORD_DEFAULT);
         $consulta->bindValue(':usuario', $this->usuario, PDO::PARAM_STR);
-        $consulta->bindValue(':clave', $claveHash);
+        $consulta->bindValue(':clave', $this->clave);
         $consulta->bindValue(':nombre_empleado', $this->nombre_empleado, PDO::PARAM_STR);
         $consulta->bindValue(':tipo_id', $this->tipo_id, PDO::PARAM_INT);
         $consulta->bindValue(':fecha_registro', $this->fecha_registro);
@@ -31,7 +31,7 @@ class Usuario
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM usuarios");
         $consulta->execute();
-
+        
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Usuario');
     }
 

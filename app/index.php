@@ -19,7 +19,7 @@ require_once './controllers/UsuarioController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/MesasController.php';
 require_once './controllers/PedidosController.php';
-
+require_once './middlewares/AuthMiddleware.php';
 
 
 // Load ENV
@@ -40,25 +40,25 @@ $app->group('/usuarios', function (RouteCollectorProxy $group) {
   $group->get('[/]', \UsuarioController::class . ':TraerTodos');
   $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
   $group->post('[/]', \UsuarioController::class . ':CargarUno');
-});
+})->add(new AuthMiddleware());
 
 $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \ProductoController::class . ':TraerTodos');
   $group->get('/{producto}', \ProductoController::class . ':TraerUno');
   $group->post('[/]', \ProductoController::class . ':CargarUno');
-});
+})->add(new AuthMiddleware());
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
   $group->get('[/]', \MesasController::class . ':TraerTodos');
   $group->get('/{mesa}', \MesasController::class . ':TraerUno');
   $group->post('[/]', \MesasController::class . ':CargarUno');
-});
+})->add(new AuthMiddleware());
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidosController::class . ':TraerTodos');
   $group->get('/{pedido}', \PedidosController::class . ':TraerUno');
   $group->post('[/]', \PedidosController::class . ':CargarUno');
-});
+})->add(new AuthMiddleware());
 
 
 $app->get('[/]', function (Request $request, Response $response) {

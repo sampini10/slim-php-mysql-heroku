@@ -6,17 +6,17 @@ class Pedido
     public $mesa_id;
     public $usuario_id;
     public $cliente_nombre;
-    public $estado;
+    public $estado_pedido_id;
     public $fecha_registro;
     
     public function crearPedido()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO pedidos (mesa_id, usuario_id, cliente_nombre, estado, fecha_registro) VALUES (:mesa_id, :usuario_id, :cliente_nombre, :estado, :fecha_registro)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO pedidos (mesa_id, usuario_id, cliente_nombre, estado_pedido_id, fecha_registro) VALUES (:mesa_id, :usuario_id, :cliente_nombre, :estado_pedido_id, :fecha_registro)");
         $consulta->bindValue(':mesa_id', $this->mesa_id, PDO::PARAM_INT);
         $consulta->bindValue(':usuario_id', $this->usuario_id, PDO::PARAM_INT);
         $consulta->bindValue(':cliente_nombre', $this->fecha_registro, PDO::PARAM_STR);
-        $consulta->bindValue(':estado', $this->estado, PDO::PARAM_INT);
+        $consulta->bindValue(':estado_pedido_id', $this->estado_pedido_id, PDO::PARAM_INT);
         $consulta->bindValue(':fecha_registro', $this->fecha_registro);
         
         $consulta->execute();
