@@ -15,7 +15,8 @@ class Pedido
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO pedidos (mesa_id, usuario_id, cliente_nombre, estado_pedido_id, fecha_registro) VALUES (:mesa_id, :usuario_id, :cliente_nombre, :estado_pedido_id, :fecha_registro)");
         $consulta->bindValue(':mesa_id', $this->mesa_id, PDO::PARAM_INT);
         $consulta->bindValue(':usuario_id', $this->usuario_id, PDO::PARAM_INT);
-        $consulta->bindValue(':cliente_nombre', $this->fecha_registro, PDO::PARAM_STR);
+        $consulta->bindValue(':cliente_nombre', $this->cliente_nombre, PDO::PARAM_STR);
+        //el estado deberia inicializar en 1 siempre.
         $consulta->bindValue(':estado_pedido_id', $this->estado_pedido_id, PDO::PARAM_INT);
         $consulta->bindValue(':fecha_registro', $this->fecha_registro);
         

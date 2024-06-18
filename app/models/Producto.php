@@ -19,7 +19,12 @@ class Producto
         $consulta->bindValue(':precio', $this->precio);
         $consulta->bindValue(':fecha_registro', $this->fecha_registro);
         
-        $consulta->execute();
+        try{
+            $consulta->execute();
+        }
+        catch(Exception $ex){
+            echo "Falle" . $ex;
+        }
 
         return $objAccesoDatos->obtenerUltimoId();
     }

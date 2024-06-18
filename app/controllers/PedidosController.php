@@ -17,7 +17,7 @@ class PedidosController extends Pedido implements IApiUsable
 
         $response->getBody()->write($payload);
         return $response
-          ->withHeader('Content-Type', 'application/json');
+            ->withHeader('Content-Type', 'application/json');
     }
     public function CargarUno($request, $response, $args)
     {
@@ -43,7 +43,6 @@ class PedidosController extends Pedido implements IApiUsable
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
-
     }
     public function BorrarUno($request, $response, $args)
     {

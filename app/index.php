@@ -20,7 +20,8 @@ require_once './controllers/ProductoController.php';
 require_once './controllers/MesasController.php';
 require_once './controllers/PedidosController.php';
 require_once './middlewares/AuthMiddleware.php';
-
+require_once './controllers/TokenController.php';
+require_once './utils/AutenticadorJWT.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -36,29 +37,35 @@ $app->addErrorMiddleware(true, true, true);
 $app->addBodyParsingMiddleware();
 
 // Routes
+$app->group('/token', function (RouteCollectorProxy $group){
+  $group->get('/crearToken', \TokenController::class . ':ObtenerToken');
+  $group->get('/verificarToken', \TokenController::class . ':ValidarToken');
+});
+
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
   $group->get('[/]', \UsuarioController::class . ':TraerTodos');
   $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
   $group->post('[/]', \UsuarioController::class . ':CargarUno');
-})->add(new AuthMiddleware());
+})->add(AuthMiddleware::class);
 
 $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \ProductoController::class . ':TraerTodos');
   $group->get('/{producto}', \ProductoController::class . ':TraerUno');
   $group->post('[/]', \ProductoController::class . ':CargarUno');
-})->add(new AuthMiddleware());
+  $group->post('/cargarCSV', \ProductoController::class . ':CargarProductoCSV');
+})->add(AuthMiddleware::class);
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
   $group->get('[/]', \MesasController::class . ':TraerTodos');
   $group->get('/{mesa}', \MesasController::class . ':TraerUno');
   $group->post('[/]', \MesasController::class . ':CargarUno');
-})->add(new AuthMiddleware());
+})->add(AuthMiddleware::class);
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
   $group->get('[/]', \PedidosController::class . ':TraerTodos');
   $group->get('/{pedido}', \PedidosController::class . ':TraerUno');
   $group->post('[/]', \PedidosController::class . ':CargarUno');
-})->add(new AuthMiddleware());
+})->add(AuthMiddleware::class);
 
 
 $app->get('[/]', function (Request $request, Response $response) {

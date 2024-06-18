@@ -17,7 +17,7 @@ class ProductoController extends Producto implements IApiUsable
 
         $response->getBody()->write($payload);
         return $response
-          ->withHeader('Content-Type', 'application/json');
+            ->withHeader('Content-Type', 'application/json');
     }
     public function CargarUno($request, $response, $args)
     {
@@ -41,12 +41,37 @@ class ProductoController extends Producto implements IApiUsable
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
-
     }
     public function BorrarUno($request, $response, $args)
     {
     }
     public function ModificarUno($request, $response, $args)
     {
+    }
+
+    public function CargarProductoCSV($request, $response, $args)
+    {
+        $archivo = $request->getUploadedFiles();
+        $data = $archivo['archivo'];
+        $csv = $data->getStream()->getContents();
+
+        if ($csv !== false) {
+            $rows = array_map('str_getcsv', explode("\n", $csv));
+            foreach ($rows as $row) {
+                if (!empty($row) && count($row) >= 3) {
+                    $producto = new Producto();
+                    $producto->nombre_producto = $row[0];
+                    $producto->precio = $row[1];
+                    $producto->categoria_id = $row[2];
+                    $producto->fecha_registro = Date::now();
+
+                    $producto->CrearProducto();
+                }
+            }
+        }
+        $payload = json_encode(array("mensaje" => "Producto creado con exito"));
+        $response->getBody()->write($payload);
+
+        return $response->withHeader('Content-Type', 'application/json');
     }
 }

@@ -12,6 +12,16 @@
 				{
 					"name": "CreateUsuario",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTg2NjgzMjcsImV4cCI6MTcxODcyODMyNywiYXVkIjoiNzJlYjZlMDMwYmM3MTE3YTFhMWQ4ZWQzMzNiMjBjM2JiOTU0ZjRiNiIsImRhdGEiOnsidXN1YXJpbyI6Im5zYW1waW5pIiwicGVyZmlsIjoiU09DSU8ifSwiYXBwIjoiVGVzdCBKV1QifQ.Mdv_ZsBYFweyYkilaS9OvE6yALjzpgB57xO7TbUTyU0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -19,28 +29,28 @@
 							"urlencoded": [
 								{
 									"key": "usuario",
-									"value": "cGarcia",
+									"value": "eSampini",
 									"type": "text"
 								},
 								{
 									"key": "clave",
-									"value": "12213",
+									"value": "kdds2",
 									"type": "text"
 								},
 								{
 									"key": "nombre_empleado",
-									"value": "Chaly Garcia",
+									"value": "Ernesto Sampini",
 									"type": "text"
 								},
 								{
 									"key": "tipo_id",
-									"value": "2",
+									"value": "1",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:1991/usuarios/?usuario=Prueba&clave=1234",
+							"raw": "http://localhost:1991/usuarios/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -49,16 +59,6 @@
 							"path": [
 								"usuarios",
 								""
-							],
-							"query": [
-								{
-									"key": "usuario",
-									"value": "Prueba"
-								},
-								{
-									"key": "clave",
-									"value": "1234"
-								}
 							]
 						}
 					},
@@ -70,17 +70,21 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTg2NjgzMjcsImV4cCI6MTcxODcyODMyNywiYXVkIjoiNzJlYjZlMDMwYmM3MTE3YTFhMWQ4ZWQzMzNiMjBjM2JiOTU0ZjRiNiIsImRhdGEiOnsidXN1YXJpbyI6Im5zYW1waW5pIiwicGVyZmlsIjoiU09DSU8ifSwiYXBwIjoiVGVzdCBKV1QifQ.Mdv_ZsBYFweyYkilaS9OvE6yALjzpgB57xO7TbUTyU0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "usuario",
-									"value": "nsampini",
-									"type": "text"
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
 							"raw": "http://localhost:1991/usuarios/",
@@ -193,6 +197,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "CargarCSV",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTg3MzcxOTIsImV4cCI6MTcxODc5NzE5MiwiYXVkIjoiNzJlYjZlMDMwYmM3MTE3YTFhMWQ4ZWQzMzNiMjBjM2JiOTU0ZjRiNiIsImRhdGEiOnsidXN1YXJpbyI6Im5zYW1waW5pIiwicGVyZmlsIjoiU09DSU8ifSwiYXBwIjoiVGVzdCBKV1QifQ.56EYJIsojKB7sVsXHQBQXWB4QnUoAFSrFOaEOhzpuM0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/sampi/OneDrive/Desktop/MOCK_DATA.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1991/productos/cargarCSV",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"productos",
+								"cargarCSV"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -262,6 +306,46 @@
 				{
 					"name": "CrearPedidos",
 					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -283,14 +367,14 @@
 									"type": "text"
 								},
 								{
-									"key": "estado",
+									"key": "estado_pedido_id",
 									"value": "1",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:1991/pedidos/?",
+							"raw": "http://localhost:1991/pedidos/?user=admin&pass=1234",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -302,8 +386,12 @@
 							],
 							"query": [
 								{
-									"key": "",
-									"value": null
+									"key": "user",
+									"value": "admin"
+								},
+								{
+									"key": "pass",
+									"value": "1234"
 								}
 							]
 						}
@@ -325,6 +413,79 @@
 							"path": [
 								"pedidos",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "CrearToken",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "usuario",
+									"value": "nsampini",
+									"type": "text"
+								},
+								{
+									"key": "perfil",
+									"value": "SOCIO",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1991/token/crearToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"token",
+								"crearToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerificarToken",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTg2NjgzMjcsImV4cCI6MTcxODcyODMyNywiYXVkIjoiNzJlYjZlMDMwYmM3MTE3YTFhMWQ4ZWQzMzNiMjBjM2JiOTU0ZjRiNiIsImRhdGEiOnsidXN1YXJpbyI6Im5zYW1waW5pIiwicGVyZmlsIjoiU09DSU8ifSwiYXBwIjoiVGVzdCBKV1QifQ.Mdv_ZsBYFweyYkilaS9OvE6yALjzpgB57xO7TbUTyU0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1991/token/verificarToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1991",
+							"path": [
+								"token",
+								"verificarToken"
 							]
 						}
 					},
